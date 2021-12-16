@@ -15,22 +15,34 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text.lower() == "go to state2"
 
+    # 
+    # 
+    # 
+    def is_going_to_user(self, event):
+        text = event.message.text
+        return text.lower() == "go back"
+
+    def on_enter_user(self, event):
+        print("I'm entering user")
+
+        reply_token = event.reply_token
+        send_text_message(reply_token, "Trigger user \nSelect state1 or state2")
+
+    # 
+    # 
+    # 
+
     def on_enter_state1(self, event):
         print("I'm entering state1")
 
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state1")
-        self.go_back()
-
-    def on_exit_state1(self):
-        print("Leaving state1")
+        # self.go_back()
 
     def on_enter_state2(self, event):
         print("I'm entering state2")
 
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state2")
-        self.go_back()
+        # self.go_back()
 
-    def on_exit_state2(self):
-        print("Leaving state2")
